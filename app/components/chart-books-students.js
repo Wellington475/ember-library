@@ -1,32 +1,34 @@
 import Component from '@ember/component';
-
+import { get, set } from '@ember/object';
 export default Component.extend({
+  
   chartOptions: {
     chart: {
-      type: 'bar'
+      type: 'column'
     },
     title: {
-      text: 'Fruit Consumption'
+      text: 'Gráfico Quantitativo'
     },
     xAxis: {
-      categories: ['Apples', 'Bananas', 'Oranges']
+      categories: ['Books', 'Students']
     },
     yAxis: {
-      allowDecimals: false,
       title: {
-        text: 'Fruit eaten'
+        text: 'Quantidade'
       }
     }
   },
-
-  chartData: [
-    {
-      name: 'Jane',
-      data: [5, 0, 20]
-    },
-    {
-      name: 'John',
-      data: [25, 30, 15]
+  chartData: [],
+  didReceiveAttrs(){
+    this._super(...arguments);
+    
+    let model = get(this,'model');
+    if(model){
+      set(this,'chartData', [
+        {
+          data: [model.students.content.length, model.books.content.length]
+        }
+      ])
     }
-  ]
+  },
 });
