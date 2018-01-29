@@ -7,7 +7,7 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('library', {path: '/'});
+  this.route('library');
   this.route('books');
   this.route('students', function() {
     this.route('view', {path: '/:student_id'});
