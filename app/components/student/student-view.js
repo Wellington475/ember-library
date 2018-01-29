@@ -51,8 +51,8 @@ export default Component.extend({
           phone,
           email
         }).save();
-       this.get('router').transitionTo('students');
       }
+      this.get('router').transitionTo('students');
     }
   }
 });

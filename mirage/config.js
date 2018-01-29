@@ -2,22 +2,11 @@ export default function() {
   this.urlPrefix = 'http://192.168.0.109:8081/api'
   this.timing = 300;
 
-  this.get('/students', (db) => {
-    return {
-      students: db.students.all().models
-    }
-  });
+  this.get('/students', 'students');
 
-  this.get('/students/:student_id', (db, request) => {
-    return {
-      student: db.students.find(request.params.student_id)
-    }
-  });
+  this.get('/students/:student_id', 'student');
 
-  this.post('/students', (db, request) => {
-    let student = JSON.parse(request.requestBody).student;
-    return db.students.create(student);
-  });
+  this.post('/students', 'student');
 
   this.put('/students/:student_id', (db, request) => {
     let id = request.params.student_id;
@@ -28,11 +17,7 @@ export default function() {
     };
   });
 
-  this.del('/students/:student_id', (db, request) => {
-    let student = db.students.find(request.params.student_id);
-    
-    student.destroy();
-  });
+  this.del('/students/:id');
   
   // These comments are here to help you get started. Feel free to delete them.
 
