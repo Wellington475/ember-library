@@ -3,9 +3,6 @@ import {get} from '@ember/object';
 
 export default Route.extend({
   model(){
-    return get(this, 'store').findAll('student')
-    .then((item) => {
-      return item;
-    });
+    return get(this, 'store').findAll('student');
   }
 });

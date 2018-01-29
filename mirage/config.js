@@ -2,42 +2,30 @@ export default function() {
   this.urlPrefix = 'http://192.168.0.109:8081/api'
   this.timing = 300;
 
-  this.get('/students', () => {
+  this.get('/students', (db) => {
     return {
-      'students': [
-        {
-          phone: "(13) 3252-4844",
-          registration: "727456-623",
-          email: "obiwan@gmail.com",
-          name: "Obi Wan Kenobi",
-          id: 1
-        },
-        {
-          phone: "(41) 73296-4282",
-          registration: "424126-123",
-          email: "maul@sciensa",
-          name: "Darth Maul",
-          id: 2
-        }
-      ]
-    };
+      students: db.students.all().models
+    }
   });
 
-  this.get('/students/:student_id', () => {
+  this.get('/students/:student_id', (db, request) => {
     return {
-      "student": {
-        id: 50,
-        name: "FFFf",
-        registration: "AB-431",
-        phone: "62-234123",
-        email: "ff@gmail.com"
-      }
-    };
+      student: db.students.find(request.params.student_id)
+    }
   });
- 
-  this.put('/students/:student_id', () => {
-    return true;
+
+  this.post('/students', (db, request) => {
+    let student = JSON.parse(request.requestBody).student;
+    return db.students.create(student);
   });
+
+  // this.put('/students/:student_id', () => {
+  //   return true;
+  // });
+
+  // this.del('/students/:student_id', () => {
+  //   return true;
+  // });
   
   // These comments are here to help you get started. Feel free to delete them.
 
