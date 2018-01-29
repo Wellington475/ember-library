@@ -50,12 +50,8 @@ export default Component.extend({
           registration,
           phone,
           email
-        }).save().then(() => {
-          debugger
-        }).catch((a, b) => {
-          debugger
-        });
-       // this.get('router').transitionTo('students');
+        }).save();
+       this.get('router').transitionTo('students');
       }
     }
   }

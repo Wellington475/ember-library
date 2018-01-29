@@ -19,13 +19,20 @@ export default function() {
     return db.students.create(student);
   });
 
-  // this.put('/students/:student_id', () => {
-  //   return true;
-  // });
+  this.put('/students/:student_id', (db, request) => {
+    let id = request.params.student_id;
+    let attrs = JSON.parse(request.requestBody).student;
+    let student = db.students.find(id).update(attrs);
+    return {
+      student: student
+    };
+  });
 
-  // this.del('/students/:student_id', () => {
-  //   return true;
-  // });
+  this.del('/students/:student_id', (db, request) => {
+    let student = db.students.find(request.params.student_id);
+    
+    student.destroy();
+  });
   
   // These comments are here to help you get started. Feel free to delete them.
 

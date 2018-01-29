@@ -2,7 +2,7 @@
   {{student.name}}&nbsp;
 </div>
 <div class="col-md-1">
-  <a class="btn btn-danger btn-xs">Excluir</a>
+  <button {{action 'delete' student.id}} class="btn btn-danger btn-xs">Excluir</button>
 </div>
 <div class="col-md-1">
   {{#link-to 
